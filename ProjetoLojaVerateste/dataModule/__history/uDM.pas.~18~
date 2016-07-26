@@ -1,0 +1,87 @@
+unit uDM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, uADStanIntf, uADStanOption, uADStanError,
+  uADGUIxIntf, uADPhysIntf, uADStanDef, uADStanPool, uADStanAsync,
+  uADPhysManager, uADStanParam, uADDatSManager, uADDAptIntf, uADDAptManager,
+  Data.DB, uADCompDataSet, uADCompClient, uADPhysMySQL, uADStanExprFuncs,
+  uADPhysSQLite, uADPhysTDBXBase, uADPhysTDBX, uADMoniBase, uADMoniCustom,
+  uADGUIxFormsWait, uADCompGUIx;
+
+type
+  TDM = class(TDataModule)
+    conexao: TADConnection;
+    tbUsuarios: TADTable;
+    tbUsuariosid: TADAutoIncField;
+    tbUsuariosnome: TStringField;
+    tbUsuarioslogin: TStringField;
+    tbUsuariossenha: TStringField;
+    tbUsuariosstatus: TStringField;
+    tbUsuariosdt_cadastro: TDateField;
+    ADPhysMySQLDriverLink1: TADPhysMySQLDriverLink;
+    ADGUIxWaitCursor1: TADGUIxWaitCursor;
+    tbcontas_Pagar: TADTable;
+    tbcontas_Receber: TADTable;
+    pagar_Detalhes: TADTable;
+    receber_Detalhes: TADTable;
+    tbCaixa: TADTable;
+    tbcontas_Pagarid: TADAutoIncField;
+    tbcontas_Pagarnumero_doc: TStringField;
+    tbcontas_Pagardescricao: TStringField;
+    tbcontas_Pagarparcela: TIntegerField;
+    tbcontas_Pagarvlr_parcela: TBCDField;
+    tbcontas_Pagarvlr_compra: TBCDField;
+    tbcontas_Pagarvlr_abatido: TBCDField;
+    tbcontas_Pagardt_compra: TDateField;
+    tbcontas_Pagardt_cadastro: TDateField;
+    tbcontas_Pagardt_vencimento: TDateField;
+    tbcontas_Pagardt_pagamento: TDateField;
+    tbcontas_Pagarstatus: TStringField;
+    tbcontas_Receberid: TADAutoIncField;
+    tbcontas_Receberdocumento: TStringField;
+    tbcontas_Receberdescricao: TStringField;
+    tbcontas_Receberparcela: TIntegerField;
+    tbcontas_Recebervlr_parcela: TBCDField;
+    tbcontas_Recebervlr_compra: TBCDField;
+    tbcontas_Recebervlr_abatido: TBCDField;
+    tbcontas_Receberdt_compra: TDateField;
+    tbcontas_Receberdt_vencimento: TDateField;
+    tbcontas_Receberdt_cadastro: TDateField;
+    tbcontas_Receberstatus: TStringField;
+    tbcontas_Receberdt_pagamento: TDateField;
+    pagar_Detalhesid: TADAutoIncField;
+    pagar_Detalhesid_pagar: TIntegerField;
+    pagar_Detalhesdetalhes: TStringField;
+    pagar_Detalhesvalor: TBCDField;
+    pagar_Detalhesdata: TDateField;
+    pagar_Detalhesusuario: TStringField;
+    receber_Detalhesid: TADAutoIncField;
+    receber_Detalhesid_receber: TIntegerField;
+    receber_Detalhesdetalhes: TStringField;
+    receber_Detalhesvalor: TBCDField;
+    receber_Detalhesdata: TDateField;
+    receber_Detalhesusuario: TStringField;
+    tbCaixaid: TADAutoIncField;
+    tbCaixanumero_doc: TStringField;
+    tbCaixadescricao: TStringField;
+    tbCaixavalor: TBCDField;
+    tbCaixatipo: TStringField;
+    tbCaixadt_cadastro: TDateField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

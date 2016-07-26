@@ -1,0 +1,139 @@
+unit uformCadReceber;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFormCadBasico, Vcl.ImgList,
+  System.Actions, Vcl.ActnList, Data.DB, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls,
+  Datasnap.DBClient;
+
+type
+  TFormCadContasReceber = class(TFormCadBasico)
+    DBGrid2: TDBGrid;
+    Label13: TLabel;
+    Label1: TLabel;
+    Label12: TLabel;
+    SpeedButton6: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    Label14: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label2: TLabel;
+    Label11: TLabel;
+    Label9: TLabel;
+    Label7: TLabel;
+    edVariacao: TEdit;
+    edStatus: TDBEdit;
+    edDataPag: TDBEdit;
+    edQtdParc: TEdit;
+    edVlrCom: TDBEdit;
+    edDesc: TDBEdit;
+    edNumDoc: TDBEdit;
+    edDataCad: TDBEdit;
+    edDataCom: TDBEdit;
+    edVlrAbat: TDBEdit;
+    cdsParcelas: TClientDataSet;
+    cdsParcelasparcela: TIntegerField;
+    cdsParcelasvalor: TCurrencyField;
+    cdsParcelasvencimento: TDateField;
+    dsParcelas: TDataSource;
+
+    procedure acNovoExecute(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure tabsheet1Show(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadContasReceber: TFormCadContasReceber;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM, uFormCadContasPagar;
+
+procedure TFormCadContasReceber.acNovoExecute(Sender: TObject);
+begin
+
+  inherited;
+  edDataCom.Field.AsDateTime := now;
+  edDataCad.Field.AsDateTime := now;
+
+end;
+
+
+procedure TFormCadContasReceber.SpeedButton5Click(Sender: TObject);
+
+var
+I : Integer;
+begin
+  if Trim(edNumDoc.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo documento','Atenção',MB_OK+48);
+    edNumDoc.SetFocus;
+    Abort;
+  end;
+  if Trim(edDesc.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo Descrição','Atenção',MB_OK+48);
+    edDesc.SetFocus;
+    Abort;
+  end;
+   if dsTabela.DataSet.FieldByName('vlr_compra').AsFloat  = 0 then
+  begin
+    Application.MessageBox('Preencha o valor da compra','Atenção',MB_OK+48);
+    edVlrCom.SetFocus;
+    Abort;
+  end;
+  if StrToInt(edQtdParc.Text) = 0 then
+  begin
+    Application.MessageBox('Preencha o campo Quantidade Parcela(s)','Atenção',MB_OK+48);
+    edQtdParc.SetFocus;
+    Abort;
+  end;
+  if Trim(edVariacao.Text) = '' then
+  begin
+    Application.MessageBox('Preencha o campo variação da(s) Parcela(s)','Atenção',MB_OK+48);
+    edVariacao.SetFocus;
+    Abort;
+  end;
+  if Trim(edDataCom.Text) = '' then
+  begin
+    Application.MessageBox('Preencha a data da compra','Atenção',MB_OK+48);
+    edDataCom.SetFocus;
+    Abort;
+  end;
+
+cdsParcelas.EmptyDataSet;
+for I := 1 to StrToInt(edQtdParc.Text) do
+begin
+  cdsParcelas.Insert;
+//  cdsParcelas.Post;
+ // cdsParcelas.Edit;
+
+  cdsParcelasparcela.AsInteger       := i ;
+//  messagebox(FormCadContasPagar.handle,PChar('dt_vencimento '+Datetostr(dsTabela.DataSet.FieldByName('dt_vencimento').AsDateTime )),PChar('CONFIRMAÇÃO'), 0+64);
+ cdsParcelasvalor.AsFloat           :=  (dsTabela.DataSet.FieldByName('vlr_compra').AsCurrency - dsTabela.DataSet.FieldByName('vlr_abatido').AsCurrency)/
+ (StrToInt(edQtdParc.Text));
+  dsTabela.DataSet.FieldByName('dt_vencimento').AsDateTime := date + 30;
+  cdsParcelasvencimento.AsDateTime   := dsTabela.DataSet.FieldByName('dt_vencimento').AsDateTime + ((StrToInt(edVariacao.Text))*i);
+  end;
+
+end;
+
+procedure TFormCadContasReceber.tabsheet1Show(Sender: TObject);
+begin
+  inherited;
+    edVariacao.Text := '30';
+    dsTabela.DataSet.FieldByName('dt_compra').AsDateTime    :=  Date;
+    dsTabela.DataSet.FieldByName('dt_cadastro').AsDateTime  :=  Date;
+    dsTabela.DataSet.FieldByName('dt_vencimento').AsDateTime  :=  Date+30;
+end;
+
+end.

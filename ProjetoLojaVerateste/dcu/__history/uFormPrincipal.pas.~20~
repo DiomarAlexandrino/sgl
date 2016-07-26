@@ -1,0 +1,100 @@
+unit uFormPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TFormPrincipal = class(TForm)
+    LabelCadastros: TLabel;
+    Image1: TImage;
+    Label2: TLabel;
+    Label5: TLabel;
+    Image2: TImage;
+    Label1: TLabel;
+    Image3: TImage;
+    Label3: TLabel;
+    Image5: TImage;
+    Label4: TLabel;
+    Image6: TImage;
+    Image7: TImage;
+    Label7: TLabel;
+    Label8: TLabel;
+    Image4: TImage;
+    Label6: TLabel;
+    Label9: TLabel;
+    Image8: TImage;
+    Label10: TLabel;
+    Image9: TImage;
+    Label11: TLabel;
+    Image10: TImage;
+    Label12: TLabel;
+    Image11: TImage;
+    Image12: TImage;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Image13: TImage;
+    Label16: TLabel;
+    Image14: TImage;
+    Label17: TLabel;
+    Image15: TImage;
+    Label18: TLabel;
+    Image16: TImage;
+    Label19: TLabel;
+    Image17: TImage;
+    Image18: TImage;
+    Label20: TLabel;
+    Label21: TLabel;
+    Timer1: TTimer;
+    StatusBar1: TStatusBar;
+    SpeedButton1: TSpeedButton;
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPrincipal: TFormPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses uFormCadBasico;
+
+
+
+procedure TFormPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   if Application.MessageBox('Deseja realmente sair ?','Informação',MB_YESNO+MB_ICONQUESTION)= mrYes
+   then
+     Application.Terminate
+   else
+    Abort;
+end;
+
+procedure TFormPrincipal.SpeedButton1Click(Sender: TObject);
+begin
+  FormCadBasico := TFormCadBasico.Create(nil);
+  try
+     FormCadBasico.ShowModal;
+  finally
+    FreeAndNil(FormCadBasico);
+  end;
+
+end;
+
+procedure TFormPrincipal.Timer1Timer(Sender: TObject);
+begin
+  StatusBar1.Panels.Items[0].Text := 'Data:' +DateTimeToStr(now);
+end;
+
+end.

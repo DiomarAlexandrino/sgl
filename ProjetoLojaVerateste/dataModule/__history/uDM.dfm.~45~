@@ -1,0 +1,408 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 429
+  Width = 528
+  object conexao: TADConnection
+    Params.Strings = (
+      'Database=db'
+      'User_Name=root'
+      'Password=root'
+      'Server=localhost'
+      'DriverID=MySQL')
+    Connected = True
+    LoginPrompt = False
+    Left = 32
+    Top = 16
+  end
+  object tbUsuarios: TADTable
+    Active = True
+    Filtered = True
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.usuarios'
+    TableName = 'db.usuarios'
+    Left = 32
+    Top = 72
+    object tbUsuariosid: TADAutoIncField
+      DisplayLabel = 'Id:'
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object tbUsuariosnome: TStringField
+      DisplayLabel = 'Nome:'
+      FieldName = 'nome'
+      Origin = 'nome'
+      Required = True
+      Size = 50
+    end
+    object tbUsuarioslogin: TStringField
+      DisplayLabel = 'Login:'
+      FieldName = 'login'
+      Origin = 'login'
+      Required = True
+    end
+    object tbUsuariossenha: TStringField
+      DisplayLabel = 'Senha:'
+      FieldName = 'senha'
+      Origin = 'senha'
+      Required = True
+    end
+    object tbUsuariosstatus: TStringField
+      DisplayLabel = 'Status:'
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object tbUsuariosdt_cadastro: TDateField
+      DisplayLabel = 'Dt. Cadastro'
+      FieldName = 'dt_cadastro'
+      Origin = 'dt_cadastro'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+  end
+  object ADPhysMySQLDriverLink1: TADPhysMySQLDriverLink
+    Left = 128
+    Top = 16
+  end
+  object ADGUIxWaitCursor1: TADGUIxWaitCursor
+    Left = 248
+    Top = 16
+  end
+  object tbcontas_Pagar: TADTable
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.contas_pagar'
+    TableName = 'db.contas_pagar'
+    Left = 32
+    Top = 128
+    object tbcontas_Pagarid: TADAutoIncField
+      DisplayLabel = 'Id: '
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object tbcontas_Pagarnumero_doc: TStringField
+      DisplayLabel = 'N'#250'mero Doc.: '
+      FieldName = 'numero_doc'
+      Origin = 'numero_doc'
+      Required = True
+    end
+    object tbcontas_Pagardescricao: TStringField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Descri'#231#227'o: '
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 200
+    end
+    object tbcontas_Pagarparcela: TIntegerField
+      DisplayLabel = 'Parcela: '
+      FieldName = 'parcela'
+      Origin = 'parcela'
+      Required = True
+    end
+    object tbcontas_Pagarvlr_parcela: TBCDField
+      DisplayLabel = 'Vlr. Parcela: '
+      FieldName = 'vlr_parcela'
+      Origin = 'vlr_parcela'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Pagarvlr_compra: TBCDField
+      DisplayLabel = 'Vlr Compra: '
+      FieldName = 'vlr_compra'
+      Origin = 'vlr_compra'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Pagarvlr_abatido: TBCDField
+      DisplayLabel = 'Vlr Abatido:'
+      FieldName = 'vlr_abatido'
+      Origin = 'vlr_abatido'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Pagardt_compra: TDateField
+      DisplayLabel = 'Data Compra: '
+      FieldName = 'dt_compra'
+      Origin = 'dt_compra'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Pagardt_cadastro: TDateField
+      DisplayLabel = 'Data Cadastro: '
+      FieldName = 'dt_cadastro'
+      Origin = 'dt_cadastro'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Pagardt_vencimento: TDateField
+      DisplayLabel = 'Data Vencimento: '
+      FieldName = 'dt_vencimento'
+      Origin = 'dt_vencimento'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Pagardt_pagamento: TDateField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Data Pagamento: '
+      FieldName = 'dt_pagamento'
+      Origin = 'dt_pagamento'
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Pagarstatus: TStringField
+      DisplayLabel = 'Status: '
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object tbcontas_Receber: TADTable
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.contas_receber'
+    TableName = 'db.contas_receber'
+    Left = 32
+    Top = 184
+    object tbcontas_Receberid: TADAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object tbcontas_Receberdocumento: TStringField
+      FieldName = 'documento'
+      Origin = 'documento'
+      Required = True
+    end
+    object tbcontas_Receberdescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 200
+    end
+    object tbcontas_Receberparcela: TIntegerField
+      FieldName = 'parcela'
+      Origin = 'parcela'
+      Required = True
+    end
+    object tbcontas_Recebervlr_parcela: TBCDField
+      FieldName = 'vlr_parcela'
+      Origin = 'vlr_parcela'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Recebervlr_compra: TBCDField
+      FieldName = 'vlr_compra'
+      Origin = 'vlr_compra'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Recebervlr_abatido: TBCDField
+      FieldName = 'vlr_abatido'
+      Origin = 'vlr_abatido'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object tbcontas_Receberdt_compra: TDateField
+      FieldName = 'dt_compra'
+      Origin = 'dt_compra'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Receberdt_vencimento: TDateField
+      FieldName = 'dt_vencimento'
+      Origin = 'dt_vencimento'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Receberdt_cadastro: TDateField
+      FieldName = 'dt_cadastro'
+      Origin = 'dt_cadastro'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object tbcontas_Receberstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object tbcontas_Receberdt_pagamento: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dt_pagamento'
+      Origin = 'dt_pagamento'
+      EditMask = '!99/99/0000;1;_'
+    end
+  end
+  object pagar_Detalhes: TADTable
+    ObjectView = False
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.pagar_detalhes'
+    TableName = 'db.pagar_detalhes'
+    Left = 32
+    Top = 240
+    object pagar_Detalhesid: TADAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object pagar_Detalhesid_pagar: TIntegerField
+      FieldName = 'id_pagar'
+      Origin = 'id_pagar'
+      Required = True
+    end
+    object pagar_Detalhesdetalhes: TStringField
+      FieldName = 'detalhes'
+      Origin = 'detalhes'
+      Required = True
+      Size = 255
+    end
+    object pagar_Detalhesvalor: TBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object pagar_Detalhesdata: TDateField
+      FieldName = 'data'
+      Origin = 'data'
+      Required = True
+    end
+    object pagar_Detalhesusuario: TStringField
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Required = True
+      Size = 50
+    end
+  end
+  object receber_Detalhes: TADTable
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.receber_detalhes'
+    TableName = 'db.receber_detalhes'
+    Left = 32
+    Top = 296
+    object receber_Detalhesid: TADAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object receber_Detalhesid_receber: TIntegerField
+      FieldName = 'id_receber'
+      Origin = 'id_receber'
+      Required = True
+    end
+    object receber_Detalhesdetalhes: TStringField
+      FieldName = 'detalhes'
+      Origin = 'detalhes'
+      Required = True
+      Size = 255
+    end
+    object receber_Detalhesvalor: TBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object receber_Detalhesdata: TDateField
+      FieldName = 'data'
+      Origin = 'data'
+      Required = True
+    end
+    object receber_Detalhesusuario: TStringField
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Required = True
+      Size = 50
+    end
+  end
+  object tbCaixa: TADTable
+    CachedUpdates = True
+    IndexFieldNames = 'id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'db.caixa'
+    TableName = 'db.caixa'
+    Left = 32
+    Top = 352
+    object tbCaixaid: TADAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object tbCaixanumero_doc: TStringField
+      FieldName = 'numero_doc'
+      Origin = 'numero_doc'
+      Required = True
+    end
+    object tbCaixadescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 200
+    end
+    object tbCaixavalor: TBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object tbCaixatipo: TStringField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object tbCaixadt_cadastro: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dt_cadastro'
+      Origin = 'dt_cadastro'
+    end
+  end
+  object ADCommand1: TADCommand
+    Connection = conexao
+    CommandText.Strings = (
+      'select * from usuarios where  nome like "th%"')
+    Active = True
+    Left = 416
+    Top = 120
+  end
+  object ADQuery1: TADQuery
+    Connection = conexao
+    Left = 120
+    Top = 80
+  end
+end
